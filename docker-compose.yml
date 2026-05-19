@@ -1,0 +1,39 @@
+services:
+        homebridge:
+          build:
+            context: .
+          container_name: homebridge
+          restart: always
+          pull_policy: build
+          network_mode: host
+          environment:
+            - HOMEBRIDGE_CONFIG_UI_PORT=8581
+          volumes:
+            - /home/sethicis/compose/homebridge/homebridge:/homebridge:z
+          configs:
+            - source: sleep_script
+              target: /hb-scripts/sleep.sh
+              mode: 0555
+            - source: status_script
+              target: /hb-scripts/status.sh
+              mode: 0555
+            - source: wake_script
+              target: /hb-scripts/wake.sh
+              mode: 0555
+        scrypted:
+          ## TODO: implement
+
+configs:
+  sleep_script:
+    content: |
+      #!/usr/bin/env bash
+      curl http://${WOL_LOGIN}@${SLEEP_WAKE_MACHINE}:${WOL_PORT}/sleep
+  status_script:
+    content: |
+      #!/usr/bin/env bash
+      result=$(curl -s -o /dev/null -i -w "%{http_code}" -m 1 http://${WOL_LOGIN}@${WOL_MACHINE}:${WOL_PORT}/state/local)
+      echo $result
+  wake_script:
+    content: |
+      #!/usr/bin/env bash
+      etherwake -i eno1 ${WOL_MAC_ADDRESS}
