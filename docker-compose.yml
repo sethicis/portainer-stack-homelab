@@ -103,25 +103,25 @@ configs:
   sleep_script:
     content: |
       #!/usr/bin/env bash
-      curl http://${WOL_LOGIN}@${WOL_MACHINE}:${WOL_PORT}/sleep
+      curl http://$WOL_LOGIN@$WOL_MACHINE:$WOL_PORT/sleep
   status_script:
     content: |
       #!/usr/bin/env bash
-      result=$(curl -s -o /dev/null -i -w "%{http_code}" -m 1 http://${WOL_LOGIN}@${WOL_MACHINE}:${WOL_PORT}/state/local)
+      result=$(curl -s -o /dev/null -i -w "%{http_code}" -m 1 http://$WOL_LOGIN@$WOL_MACHINE:$WOL_PORT/state/local)
       echo $result
   wake_script:
     content: |
       #!/usr/bin/env bash
-      etherwake -i eno1 ${WOL_MAC_ADDRESS}
+      etherwake -i eno1 $WOL_MAC_ADDRESS
 
 volumes:
   nvr:
     driver_opts:
       type: "nfs"
-      o: "addr=${NAS_ADDRESS},nolock,soft,rw,nfsvers=4"
+      o: "addr=172.16.0.154,nolock,soft,rw,nfsvers=4"
       device: ":/volume1/public/nvr"
   config:
     driver_opts:
       type: "nfs"
-      o: "addr=${NAS_ADDRESS},nolock,soft,rw,nfsvers=4"
+      o: "addr=172.16.0.154,nolock,soft,rw,nfsvers=4"
       device: ":/volume1/content/scrypted"
