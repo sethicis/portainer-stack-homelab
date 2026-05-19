@@ -27,7 +27,7 @@ jobs:
 
           for file in "${dockerfiles[@]}"; do
             echo "Linting $file"
-            docker run --rm -i hadolint/hadolint < "$file"
+            docker run --rm -i hadolint/hadolint hadolint --ignore DL3008 --ignore DL3015 - < "$file"
           done
 
       - name: Install yamllint

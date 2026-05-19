@@ -1,3 +1,5 @@
-FROM oznu/homebridge:latest
+FROM homebridge/homebridge:2024-10-02
 
-RUN apt-get update && apt-get install -y vim unzip etherwake
+LABEL maintainer="sethicis"
+
+RUN apt-get update && apt-get install -y vim unzip etherwake && rm -rf /var/lib/apt/lists/*
