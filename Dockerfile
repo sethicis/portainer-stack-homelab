@@ -1,4 +1,4 @@
-FROM oznu/homebridge:latest
+FROM homebridge/homebridge:2024-10-02
 
 LABEL MAINTAINER=sethicis
 
