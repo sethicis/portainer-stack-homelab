@@ -1,10 +1,8 @@
 services:
   homebridge:
-    build:
-      context: .
+    image: ghcr.io/sethicis/portainer-stack-homelab@latest
     container_name: homebridge
     restart: always
-    pull_policy: build
     network_mode: host
     environment:
       - HOMEBRIDGE_CONFIG_UI_PORT=8581
