@@ -6,7 +6,11 @@ on:
       - main
   workflow_dispatch:
 
-permissions: {}
+permissions:
+  contents: read
+  packages: write
+  deployments: write
+  id-token: write
 
 concurrency:
   cancel-in-progress: true
