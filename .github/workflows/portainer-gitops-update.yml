@@ -14,7 +14,7 @@ concurrency:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository.owner }}/${{ github.repository.name }}
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   should_build:
@@ -48,7 +48,7 @@ jobs:
         # List of target platforms for build
         # platforms: # optional
         push: true
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: ${{ steps.meta.outputs.tags }},${{ env.IMAGE_NAME }}:latest
         labels: ${{ steps.meta.outputs.labels }}
   trigger-portainer:
     needs: build-docker-image
