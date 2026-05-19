@@ -1,6 +1,6 @@
 services:
   homebridge:
-    image: ghcr.io/sethicis/portainer-stack-homelab@latest
+    image: ghcr.io/sethicis/portainer-stack-homelab:latest
     container_name: homebridge
     restart: always
     network_mode: host
