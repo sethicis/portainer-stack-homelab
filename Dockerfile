@@ -1,4 +1,4 @@
-FROM homebridge/homebridge:2024-10-02
+FROM homebridge/homebridge:2026-05-13
 
 LABEL maintainer="sethicis"
 
