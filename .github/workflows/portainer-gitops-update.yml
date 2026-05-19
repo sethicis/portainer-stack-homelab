@@ -1,0 +1,25 @@
+name: Portainer GitOps Update
+
+on:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+jobs:
+  trigger-portainer:
+    runs-on: ubuntu-latest
+    # If the hook is defined, run the job, otherwise skip
+    if: vars.PORTAINER_HOOK
+    steps:
+      - name: Trigger Portainer webhook
+        env:
+          PORTAINER_HOOK: ${{ vars.PORTAINER_HOOK }}
+        run: |
+          if [ -z "$PORTAINER_HOOK" ]; then
+            echo "PORTAINER_HOOK is not set"
+            exit 1
+          fi
+
+          curl --fail --show-error --silent --request POST "$PORTAINER_HOOK"
