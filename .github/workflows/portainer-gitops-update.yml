@@ -12,9 +12,10 @@ permissions:
   deployments: write
   id-token: write
 
-concurrency:
-  cancel-in-progress: true
-  group: gitops-${{github.ref}}
+# Commented out because concurrency currently doesn't make sense for main and can lead to missed Docker builds
+# concurrency:
+#   cancel-in-progress: true
+#   group: gitops-${{github.ref}}
 
 env:
   REGISTRY: ghcr.io
