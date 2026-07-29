@@ -1,4 +1,4 @@
-FROM homebridge/homebridge:2026-06-24
+FROM homebridge/homebridge:2026-07-20
 
 # This dockerfile is required because one or more of the libraries used by the homebridge plugins require depedencies not included in the default image
 LABEL maintainer="sethicis"
